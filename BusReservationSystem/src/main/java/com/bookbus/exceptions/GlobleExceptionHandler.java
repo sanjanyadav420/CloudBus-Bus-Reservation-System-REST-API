@@ -46,6 +46,18 @@ public class GlobleExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.NOT_ACCEPTABLE);
 
 	}
+	
+	
+	@ExceptionHandler(FeedbackException.class)
+	public ResponseEntity<MyErrorDetails> studentExceptionEhandler(FeedbackException se, WebRequest req) {
+		
+		MyErrorDetails err= new MyErrorDetails();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(se.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+	}
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> otherExceptionHandler(Exception e, WebRequest wReq) {
