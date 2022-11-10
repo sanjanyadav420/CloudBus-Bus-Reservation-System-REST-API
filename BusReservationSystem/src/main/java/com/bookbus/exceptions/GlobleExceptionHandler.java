@@ -11,6 +11,30 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobleExceptionHandler {
 
+	@ExceptionHandler(UserException.class)
+	public ResponseEntity<MyErrorDetails> otherExceptionHandler(UserException ue, WebRequest wReq) {
+
+		MyErrorDetails error = new MyErrorDetails();
+		error.setTimestamp(LocalDateTime.now());
+		error.setMessage(ue.getMessage());
+		error.setDetails(wReq.getDescription(false));
+
+		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.BAD_REQUEST);
+
+	}
+	
+	@ExceptionHandler(LogException.class)
+	public ResponseEntity<MyErrorDetails> otherExceptionHandler(LogException le, WebRequest wReq) {
+
+		MyErrorDetails error = new MyErrorDetails();
+		error.setTimestamp(LocalDateTime.now());
+		error.setMessage(le.getMessage());
+		error.setDetails(wReq.getDescription(false));
+
+		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.NOT_FOUND);
+
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<MyErrorDetails> otherExceptionHandler(MethodArgumentNotValidException manve) {
 
@@ -31,7 +55,7 @@ public class GlobleExceptionHandler {
 		error.setMessage(e.getMessage());
 		error.setDetails(wReq.getDescription(false));
 
-		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.BAD_REQUEST);
 
 	}
 }
