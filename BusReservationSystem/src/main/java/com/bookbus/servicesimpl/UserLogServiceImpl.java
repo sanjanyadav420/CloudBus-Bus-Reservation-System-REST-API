@@ -55,7 +55,7 @@ public class UserLogServiceImpl implements UserLogService {
 			return "You are successfully logged Out.";
 		}
 		else
-			throw new LogException("Please provide a valid Id.");
+			throw new LogException("Please provide a valid userId or you are not logged In.");
 		
 	}
 

@@ -21,6 +21,7 @@ public class BusServiceImpl implements BusService{
 	
 	@Override
 	public Bus addBus(Bus bus) {
+		
 		Bus savedBus=busRepo.save(bus);
 		return savedBus;
 	}

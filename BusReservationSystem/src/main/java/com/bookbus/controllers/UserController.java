@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bookbus.exceptions.LogException;
 import com.bookbus.exceptions.UserException;
 import com.bookbus.models.User;
 import com.bookbus.services.UserService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/cloudbus")
@@ -56,10 +56,10 @@ public class UserController {
 		return new ResponseEntity<User>(user1, HttpStatus.FOUND);
 	}
 	
-	@GetMapping("/users")
-	public ResponseEntity<List<User>> viewAllUser() throws UserException, LogException
+	@GetMapping("/admins/{adminId}")
+	public ResponseEntity<List<User>> viewAllUser(@PathVariable("adminId") Integer adminId) throws UserException, LogException
 	{
-		List<User> users = uService.viewAllUser();
+		List<User> users = uService.viewAllUser(adminId);
 		
 		return new ResponseEntity<List<User>>(users, HttpStatus.FOUND);
 	}
