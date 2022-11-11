@@ -31,7 +31,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 			throw new FeedbackException("Feedback not found");
 		}
-		Feedback updatedFeedBack = feedbackRepo.save(updateFeedback);
+		Feedback updatedFeedBack = feedbackRepo.save(updateFeedback.get());
 
 		return updatedFeedBack;
 

@@ -3,10 +3,12 @@ package com.bookbus.models;
 import java.time.LocalDate;
 
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -42,7 +44,10 @@ public class Feedback {
 	
 	private LocalDate feedbackdate;
 	
+	@OneToOne(cascade =CascadeType.ALL)
 	private User users;
+	
+	@OneToOne(cascade =CascadeType.ALL)
 	private Bus bus;
 
 }

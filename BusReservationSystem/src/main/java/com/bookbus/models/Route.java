@@ -40,6 +40,6 @@ public class Route {
 	private String routeTo;
 	private Integer distance;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Bus> busList = new ArrayList<>();
 }

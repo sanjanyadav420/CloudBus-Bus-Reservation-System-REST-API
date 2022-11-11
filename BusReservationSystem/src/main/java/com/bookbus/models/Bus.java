@@ -60,10 +60,10 @@ public class Bus {
 	@Size(min=3,max=15,message = "Destination station name should be minimum 3 and maximum 15 character")
 	private String routeTo;
 	
-	@Future(message = "Arrival time should be in future")
+//	@Future(message = "Arrival time should be in future")
 	private LocalTime arrivalTime;
 	
-	@Future(message = "Departure time should be in future")
+//	@Future(message = "Departure time should be in future")
 	private LocalTime departureTime;
 	
 	@Min(value = 0,message = "Minimum seat is 0")

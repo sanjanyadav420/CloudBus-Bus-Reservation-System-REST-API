@@ -11,7 +11,7 @@ import com.bookbus.models.Bus;
 @Repository
 public interface BusRepository extends JpaRepository<Bus,Integer>{
 	
-	public List<Bus> FindBybusType(String busType);
+	public List<Bus> findByBusType(String busType);
 	
 	@Query("from Bus")
 	public List<Bus> viewAllBus();

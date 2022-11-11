@@ -62,7 +62,7 @@ public class BusServiceImpl implements BusService{
 	
 	@Override
 	public List<Bus> viewBusByType(String busType) throws BusNotFoundException {
-		List<Bus> buses=busRepo.FindBybusType(busType);
+		List<Bus> buses=busRepo.findByBusType(busType);
 		if(buses.size()==0) {
 			throw new BusNotFoundException("No bus found");
 		}

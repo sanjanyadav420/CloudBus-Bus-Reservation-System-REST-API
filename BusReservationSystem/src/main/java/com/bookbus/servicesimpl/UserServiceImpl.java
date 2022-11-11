@@ -3,12 +3,15 @@ package com.bookbus.servicesimpl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.bookbus.exceptions.LogException;
 import com.bookbus.exceptions.UserException;
 import com.bookbus.models.User;
 import com.bookbus.repositories.UserRepo;
 import com.bookbus.services.UserService;
 
+@Service
 public class UserServiceImpl implements UserService{
 
 	@Autowired

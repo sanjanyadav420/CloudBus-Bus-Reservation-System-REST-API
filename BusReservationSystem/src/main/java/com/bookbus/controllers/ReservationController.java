@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbus.exceptions.ReservationNotFoundException;
@@ -25,14 +26,14 @@ public class ReservationController {
 	
 	
 	@PostMapping("/reservatons")
-	public ResponseEntity<Reservation> addReservation(Reservation reservation) {
+	public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) {
 		Reservation savedReservation=resService.addReservation(reservation);
 		return new ResponseEntity<Reservation>(savedReservation,HttpStatus.CREATED);
 	}
 	
 	
 	@PutMapping("/reservatons")
-	public ResponseEntity<Reservation> updateReservation(Reservation reservation) throws ReservationNotFoundException {
+	public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) throws ReservationNotFoundException {
 		Reservation updatedReservation=resService.updateReservation(reservation);
 		return new ResponseEntity<Reservation>(updatedReservation,HttpStatus.ACCEPTED);
 	}
