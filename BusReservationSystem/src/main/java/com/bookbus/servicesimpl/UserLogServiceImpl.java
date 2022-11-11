@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bookbus.exceptions.LogException;
 import com.bookbus.models.CurrentUserSession;
-import com.bookbus.models.LoginDTO;
+import com.bookbus.models.UserLoginDTO;
 import com.bookbus.models.User;
 import com.bookbus.repositories.UserLogRepo;
 import com.bookbus.repositories.UserRepo;
@@ -23,7 +23,7 @@ public class UserLogServiceImpl implements UserLogService {
 	private UserLogRepo userLogRepo;
 	
 	@Override
-	public String userLogIn(LoginDTO dto) throws LogException {
+	public String userLogIn(UserLoginDTO dto) throws LogException {
 		
 		User user = uRepo.findByEmailId(dto.getEmailId());
 		
@@ -35,7 +35,7 @@ public class UserLogServiceImpl implements UserLogService {
 			
 			if(cUserSession.isPresent()) throw new LogException("You are already LoggedIn with this EmailId "+dto.getEmailId());
 			
-			userLogRepo.save(new CurrentUserSession(user.getUserId(), "User", LocalDateTime.now()));
+			userLogRepo.save(new CurrentUserSession(user.getUserId(), LocalDateTime.now()));
 			
 			return "Hi "+user.getFirstName()+" you are loggedIn successfully.";
 		}
@@ -50,7 +50,7 @@ public class UserLogServiceImpl implements UserLogService {
 		
 		if(cUserSession.isPresent())
 		{
-			uRepo.deleteById(userId);
+			userLogRepo.deleteById(userId);
 			
 			return "You are successfully logged Out.";
 		}
