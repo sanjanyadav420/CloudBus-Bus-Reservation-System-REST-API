@@ -1,13 +1,12 @@
 package com.bookbus.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,7 +29,8 @@ public class User {
 	private Long mobile;
 	private String emailId;
 	
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Reservation reserve;
 	
 	public User(String userName, String password, String firstName, String lastName, Long mobile, String emailId) {
 		super();

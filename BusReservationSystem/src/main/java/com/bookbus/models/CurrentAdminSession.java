@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CurrentUserSession {
+public class CurrentAdminSession {
 
 	@Id
 	@Column(unique = true)
-	private Integer userId;
+	private Integer adminId;
 	private LocalDateTime localDateTime;
 
 }
