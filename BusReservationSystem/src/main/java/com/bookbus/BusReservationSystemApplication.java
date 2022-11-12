@@ -20,7 +20,6 @@ public class BusReservationSystemApplication {
 		
 	}
 	
-	
 	@Bean
 	public Docket swaggerConfig()
 	{
@@ -43,6 +42,4 @@ public class BusReservationSystemApplication {
 				Collections.emptyList());
 	}
 	
-	
-
 }
