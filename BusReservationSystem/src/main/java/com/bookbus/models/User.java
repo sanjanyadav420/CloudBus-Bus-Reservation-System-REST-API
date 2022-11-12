@@ -38,7 +38,7 @@ public class User {
 	
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
-	private Reservation reserve;
+	private Reservation reservation;
 	
 	public User(String userName, String password, String firstName, String lastName, Long mobile, String emailId) {
 		super();
