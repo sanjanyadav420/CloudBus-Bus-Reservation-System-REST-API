@@ -11,9 +11,9 @@ public interface BusService {
 	
 	public Bus updateBus(Bus bus) throws BusNotFoundException;
 	
-	public Bus deleteBus(int busId) throws BusNotFoundException;
+	public Bus deleteBus(Integer busId) throws BusNotFoundException;
 	
-	public Bus viewBus(int busId) throws BusNotFoundException;
+	public Bus viewBus(Integer busId) throws BusNotFoundException;
 	
 	public List<Bus> viewBusByType(String busType) throws BusNotFoundException;
 	
