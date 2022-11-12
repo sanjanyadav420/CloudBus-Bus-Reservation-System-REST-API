@@ -22,8 +22,7 @@ public class BusServiceImpl implements BusService{
 	@Override
 	public Bus addBus(Bus bus) {
 		
-		Bus savedBus=busRepo.save(bus);
-		return savedBus;
+		return busRepo.save(bus);
 	}
 
 	
@@ -39,7 +38,7 @@ public class BusServiceImpl implements BusService{
 
 	
 	@Override
-	public Bus deleteBus(int busId) throws BusNotFoundException {
+	public Bus deleteBus(Integer busId) throws BusNotFoundException {
 		Optional<Bus> opt=busRepo.findById(busId);
 		if(opt.isPresent()) {
 			busRepo.delete(opt.get());
@@ -51,7 +50,7 @@ public class BusServiceImpl implements BusService{
 
 	
 	@Override
-	public Bus viewBus(int busId) throws BusNotFoundException {
+	public Bus viewBus(Integer busId) throws BusNotFoundException {
 		Optional<Bus> opt=busRepo.findById(busId);
 		if(opt.isPresent()) {
 			return opt.get();
