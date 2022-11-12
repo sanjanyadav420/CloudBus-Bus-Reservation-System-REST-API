@@ -59,6 +59,19 @@ public class GlobleExceptionHandler {
 		
 		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(ReservationNotFoundException.class)
+	public ResponseEntity<MyErrorDetails> reservatonNotFoundExceptionHandller(ReservationNotFoundException re,WebRequest req){
+		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(),re.getMessage(),req.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@ExceptionHandler(BusNotFoundException.class)
+	public ResponseEntity<MyErrorDetails> busNotFoundExceptionHandller(BusNotFoundException br,WebRequest req){
+		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(),br.getMessage(),req.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> otherExceptionHandler(Exception e, WebRequest wReq) {
@@ -73,16 +86,5 @@ public class GlobleExceptionHandler {
 	}
 	
 	
-	@ExceptionHandler(ReservationNotFoundException.class)
-	public ResponseEntity<MyErrorDetails> reservatonNotFoundExceptionHandller(ReservationNotFoundException re,WebRequest req){
-		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(),re.getMessage(),req.getDescription(false));
-		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
-	}
 	
-	
-	@ExceptionHandler(BusNotFoundException.class)
-	public ResponseEntity<MyErrorDetails> busNotFoundExceptionHandller(BusNotFoundException br,WebRequest req){
-		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(),br.getMessage(),req.getDescription(false));
-		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
-	}
 }
