@@ -65,7 +65,7 @@ public class ReservationController {
 	
 	@GetMapping("/allreservatons/{date}")
 	public ResponseEntity<List<Reservation>> getAllReservation(@PathVariable("date") String reservationDate) throws ReservationNotFoundException{
-		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate ld=LocalDate.parse(reservationDate,dtf);
 		List<Reservation> allReservationsByDate=resService.getAllReservation(ld);
 		return new ResponseEntity<List<Reservation>>(allReservationsByDate,HttpStatus.CREATED);
