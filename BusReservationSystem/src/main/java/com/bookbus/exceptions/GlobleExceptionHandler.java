@@ -1,3 +1,4 @@
+
 package com.bookbus.exceptions;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,30 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobleExceptionHandler {
 
+	@ExceptionHandler(UserException.class)
+	public ResponseEntity<MyErrorDetails> otherExceptionHandler(UserException ue, WebRequest wReq) {
+
+		MyErrorDetails error = new MyErrorDetails();
+		error.setTimestamp(LocalDateTime.now());
+		error.setMessage(ue.getMessage());
+		error.setDetails(wReq.getDescription(false));
+
+		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.BAD_REQUEST);
+
+	}
+	
+	@ExceptionHandler(LogException.class)
+	public ResponseEntity<MyErrorDetails> otherExceptionHandler(LogException le, WebRequest wReq) {
+
+		MyErrorDetails error = new MyErrorDetails();
+		error.setTimestamp(LocalDateTime.now());
+		error.setMessage(le.getMessage());
+		error.setDetails(wReq.getDescription(false));
+
+		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.NOT_FOUND);
+
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<MyErrorDetails> otherExceptionHandler(MethodArgumentNotValidException manve) {
 
@@ -22,6 +47,18 @@ public class GlobleExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.NOT_ACCEPTABLE);
 
 	}
+	
+	
+	@ExceptionHandler(FeedbackException.class)
+	public ResponseEntity<MyErrorDetails> studentExceptionEhandler(FeedbackException se, WebRequest req) {
+		
+		MyErrorDetails err= new MyErrorDetails();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(se.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+	}
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> otherExceptionHandler(Exception e, WebRequest wReq) {
@@ -31,7 +68,21 @@ public class GlobleExceptionHandler {
 		error.setMessage(e.getMessage());
 		error.setDetails(wReq.getDescription(false));
 
-		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.BAD_REQUEST);
 
+	}
+	
+	
+	@ExceptionHandler(ReservationNotFoundException.class)
+	public ResponseEntity<MyErrorDetails> reservatonNotFoundExceptionHandller(ReservationNotFoundException re,WebRequest req){
+		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(),re.getMessage(),req.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@ExceptionHandler(BusNotFoundException.class)
+	public ResponseEntity<MyErrorDetails> busNotFoundExceptionHandller(BusNotFoundException br,WebRequest req){
+		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(),br.getMessage(),req.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	}
 }
