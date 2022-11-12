@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbus.dto.BusDto;
@@ -21,7 +20,6 @@ import com.bookbus.models.Bus;
 import com.bookbus.services.BusService;
 
 @RestController
-@RequestMapping("/cloudbus")
 public class BusController {
 	
 	@Autowired
