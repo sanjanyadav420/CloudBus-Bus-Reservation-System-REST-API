@@ -11,7 +11,19 @@ import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
 public class GlobleExceptionHandler {
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<MyErrorDetails> otherExceptionHandler(MethodArgumentNotValidException manve) {
 
+		MyErrorDetails error = new MyErrorDetails();
+		error.setTimestamp(LocalDateTime.now());
+		error.setMessage("Validation failed...");
+		error.setDetails(manve.getBindingResult().getFieldError().getDefaultMessage());
+
+		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.NOT_ACCEPTABLE);
+
+	}
+	
 	@ExceptionHandler(UserException.class)
 	public ResponseEntity<MyErrorDetails> otherExceptionHandler(UserException ue, WebRequest wReq) {
 
@@ -35,19 +47,6 @@ public class GlobleExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.NOT_FOUND);
 
 	}
-	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<MyErrorDetails> otherExceptionHandler(MethodArgumentNotValidException manve) {
-
-		MyErrorDetails error = new MyErrorDetails();
-		error.setTimestamp(LocalDateTime.now());
-		error.setMessage(manve.getMessage());
-		error.setDetails(manve.getBindingResult().getFieldError().getDefaultMessage());
-
-		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.NOT_ACCEPTABLE);
-
-	}
-	
 	
 	@ExceptionHandler(FeedbackException.class)
 	public ResponseEntity<MyErrorDetails> studentExceptionEhandler(FeedbackException se, WebRequest req) {

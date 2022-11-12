@@ -26,8 +26,6 @@ public class Feedback {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer feedBackId;
 	
-	
-	
 	@Min(value= 0, message= "Rate More than 0")
 	@Max(value= 5, message = "Rate Less than 5")
 	private Integer driverRating;
@@ -47,7 +45,7 @@ public class Feedback {
 	
 	@JsonIgnore
 	@OneToOne(cascade =CascadeType.ALL)
-	private User users;
+	private User user;
 	
 	@JsonIgnore
 	@OneToOne(cascade =CascadeType.ALL)

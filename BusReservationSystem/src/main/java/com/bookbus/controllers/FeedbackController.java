@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bookbus.exceptions.FeedbackException;
 import com.bookbus.exceptions.LogException;
 import com.bookbus.models.Feedback;
 import com.bookbus.services.FeedbackService;
 
-@RestController("/cloudbus")
+@RestController
+@RequestMapping("/cloudbus")
 public class FeedbackController {
 	
 	@Autowired
@@ -34,16 +36,16 @@ public class FeedbackController {
 		
 	}
 	
-	@PutMapping("/feedback/{userid}")
-	public ResponseEntity<Feedback> updateFeedBackHandler(@PathVariable("userid") Integer userId , @Valid @RequestBody Feedback feedback) throws FeedbackException, LogException {
+	@PutMapping("/feedback/{userId}")
+	public ResponseEntity<Feedback> updateFeedBackHandler(@PathVariable("userId") Integer userId , @Valid @RequestBody Feedback feedback) throws FeedbackException, LogException {
 		
 		Feedback updateFeedback= feedbackservice.updateFeedBack(feedback, userId);
 		
 		return new ResponseEntity<Feedback>(updateFeedback, HttpStatus.OK);
 	}
 	
-	@PutMapping("/feedback/{id}")
-	public ResponseEntity<Feedback> viewFeedBackHandler(@PathVariable("id") Integer feedbackid) throws FeedbackException{
+	@GetMapping("/feedback/{feedbackId}")
+	public ResponseEntity<Feedback> viewFeedBackHandler(@PathVariable("feedbackId") Integer feedbackid) throws FeedbackException{
 		
 		Feedback viewFeedback= feedbackservice.viewFeedBack(feedbackid);
 		

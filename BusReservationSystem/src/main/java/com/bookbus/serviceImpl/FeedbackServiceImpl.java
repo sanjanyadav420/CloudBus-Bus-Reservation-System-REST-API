@@ -8,6 +8,7 @@ import com.bookbus.exceptions.FeedbackException;
 import com.bookbus.exceptions.LogException;
 import com.bookbus.models.CurrentUserSession;
 import com.bookbus.models.Feedback;
+import com.bookbus.models.User;
 import com.bookbus.repositories.FeedbackRepo;
 import com.bookbus.repositories.UserLogRepo;
 import com.bookbus.repositories.UserRepo;
@@ -31,7 +32,15 @@ public class FeedbackServiceImpl implements FeedbackService {
 		Optional<CurrentUserSession> cus = userlogrepo.findById(UserId);
 
 		if (cus.isPresent()) {
+			
+			Optional<User> userOpt = userRepo.findById(UserId);
+			User user = userOpt.get();
+			
+			feedback.setUser(user);
+			feedback.setBus(user.getReservation().getBus()); 
+			
 			return feedbackRepo.save(feedback);
+			
 		} else {
 			throw new LogException("Please Login First/ Inavlid User Id " + UserId);
 		}
