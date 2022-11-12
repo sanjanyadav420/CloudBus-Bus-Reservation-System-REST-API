@@ -28,26 +28,26 @@ public class RouteController {
 	private RouteService routeService;
 
 	@PostMapping("/route/admin")
-	public ResponseEntity<Route> addRoute(@Valid @RequestBody Route route,@RequestParam(required = false) String key) throws RouteException, LogException{
+	public ResponseEntity<Route> addRoute(@Valid @RequestBody Route route,@RequestParam(required = false) Integer adminId) throws RouteException, LogException{
 		
-		Route newRoute= routeService.addRoute(route);
+		Route newRoute= routeService.addRoute(route, adminId);
 		
 		return new ResponseEntity<Route>(newRoute,HttpStatus.ACCEPTED);
 	}
 	
 	
 	@DeleteMapping("/route/admin/{routeId}")
-	public ResponseEntity<Route> DeleteRoute(@PathVariable("routeId") Integer routeId,@RequestParam(required = false) String key) throws RouteException, LogException{
+	public ResponseEntity<Route> DeleteRoute(@PathVariable("routeId") Integer routeId,@RequestParam(required = false) Integer adminId) throws RouteException, LogException{
 		
-		Route route = routeService.deleteRoute(routeId);
+		Route route = routeService.deleteRoute(routeId, adminId);
 		
 		return new ResponseEntity<Route>(route,HttpStatus.GONE);
 	}
 	
 	@PutMapping("/route/admin")
-	public ResponseEntity<Route> updateRoute(@Valid @RequestBody Route route,@RequestParam(required = false) String key) throws RouteException, LogException{
+	public ResponseEntity<Route> updateRoute(@Valid @RequestBody Route route,@RequestParam(required = false) Integer adminId) throws RouteException, LogException{
 		
-		Route newRoute= routeService.updateRoute(route);
+		Route newRoute= routeService.updateRoute(route, adminId);
 		
 		return new ResponseEntity<Route>(newRoute,HttpStatus.OK);
 	}
