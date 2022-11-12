@@ -1,4 +1,4 @@
-package com.bookbus.serviceImpl;
+package com.bookbus.servicesimpl;
 
 import java.util.List;
 import java.util.Optional;
