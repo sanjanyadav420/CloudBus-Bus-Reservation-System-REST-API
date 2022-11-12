@@ -9,11 +9,15 @@ import com.bookbus.models.Feedback;
 
 public interface FeedbackService {
 
+<<<<<<< Updated upstream
 	public Feedback addFeedBack(Feedback feedback, Integer userId) throws LogException;
+=======
+	public Feedback addFeedBack(Feedback feedback, Integer Userid) throws LogException;
+>>>>>>> Stashed changes
 	
-	public Feedback updateFeedBack (Feedback feedback) throws FeedbackException;
+	public Feedback updateFeedBack (Feedback feedback, Integer Userid) throws FeedbackException, LogException;
 	
-	public Feedback viewFeedBack(int feedbackid) throws FeedbackException;
+	public Feedback viewFeedBack(Integer feedbackid) throws FeedbackException;
 	
 	public List<Feedback> viewAllFeedBack() throws FeedbackException;
 }

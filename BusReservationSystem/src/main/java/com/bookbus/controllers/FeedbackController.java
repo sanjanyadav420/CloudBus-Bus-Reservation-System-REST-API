@@ -24,21 +24,28 @@ public class FeedbackController {
 	@Autowired
 	private FeedbackService feedbackservice;
 	
+<<<<<<< Updated upstream
 	@PostMapping("/feedback/{id}")
 	public ResponseEntity<Feedback> addFeedBackHandler( @PathVariable("id") Integer userId ,@RequestBody Feedback feedback) throws LogException {
 		
 		
 		
+=======
+	@PostMapping("/feedback/{userid}")
+	public ResponseEntity<Feedback> addFeedBackHandler( @PathVariable("userid") Integer userId ,@RequestBody Feedback feedback) throws LogException {
+		
+		
+>>>>>>> Stashed changes
 		Feedback addFeedback= feedbackservice.addFeedBack(feedback, userId);
 		
 		return new ResponseEntity<Feedback>(addFeedback, HttpStatus.CREATED);
 		
 	}
 	
-	@PutMapping("/feedback")
-	public ResponseEntity<Feedback> updateFeedBackHandler(@RequestBody Feedback feedback) throws FeedbackException {
+	@PutMapping("/feedback/{userid}")
+	public ResponseEntity<Feedback> updateFeedBackHandler(@PathVariable("userid") Integer userId ,@RequestBody Feedback feedback) throws FeedbackException, LogException {
 		
-		Feedback updateFeedback= feedbackservice.updateFeedBack(feedback);
+		Feedback updateFeedback= feedbackservice.updateFeedBack(feedback, userId);
 		
 		return new ResponseEntity<Feedback>(updateFeedback, HttpStatus.OK);
 	}
