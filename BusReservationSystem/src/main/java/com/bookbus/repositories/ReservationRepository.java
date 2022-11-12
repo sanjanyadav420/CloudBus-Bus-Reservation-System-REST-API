@@ -12,7 +12,10 @@ import com.bookbus.models.Reservation;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation,Integer>{
 	
-	public List<Reservation> findByReservationDate(LocalDate date);
+//	public List<Reservation> findByReservationDate(LocalDate date);
+	
+	@Query("select r from Reservation r where reservationDate=?1")
+	public List<Reservation> getAllReservationDetails(LocalDate date);
 	
 	@Query("from Reservation")
 	public List<Reservation> getAllReservationDetails();

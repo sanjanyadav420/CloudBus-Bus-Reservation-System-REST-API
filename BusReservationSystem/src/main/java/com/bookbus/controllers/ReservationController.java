@@ -1,6 +1,7 @@
 package com.bookbus.controllers;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookbus.dto.ReservationDto;
+import com.bookbus.exceptions.BusNotFoundException;
 import com.bookbus.exceptions.ReservationNotFoundException;
 import com.bookbus.models.Reservation;
 import com.bookbus.services.ReservationService;
@@ -25,29 +28,29 @@ public class ReservationController {
 	private ReservationService resService;
 	
 	
-	@PostMapping("/reservatons")
-	public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) {
-		Reservation savedReservation=resService.addReservation(reservation);
+	@PostMapping("/reservatons/{busId}")
+	public ResponseEntity<Reservation> addReservation(@PathVariable("busId") Integer busId,@RequestBody ReservationDto reservation) throws BusNotFoundException {
+		Reservation savedReservation=resService.addReservation(busId,reservation);
 		return new ResponseEntity<Reservation>(savedReservation,HttpStatus.CREATED);
 	}
 	
 	
-	@PutMapping("/reservatons")
-	public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) throws ReservationNotFoundException {
-		Reservation updatedReservation=resService.updateReservation(reservation);
+	@PutMapping("/reservatons/{busId}")
+	public ResponseEntity<Reservation> updateReservation(@PathVariable("busId") Integer busId, @RequestBody ReservationDto reservation) throws ReservationNotFoundException, BusNotFoundException {
+		Reservation updatedReservation=resService.updateReservation(busId,reservation);
 		return new ResponseEntity<Reservation>(updatedReservation,HttpStatus.ACCEPTED);
 	}
 	
 	
 	@DeleteMapping("/reservatons/{id}")
-	public ResponseEntity<Reservation> deleteReservation(@PathVariable("id") int reservationId) throws ReservationNotFoundException {
+	public ResponseEntity<Reservation> deleteReservation(@PathVariable("id") Integer reservationId) throws ReservationNotFoundException {
 		Reservation deletedReservation=resService.deleteReservation(reservationId);
 		return new ResponseEntity<Reservation>(deletedReservation,HttpStatus.OK);
 	}
 	
 	
 	@GetMapping("/reservatons/{id}")
-	public  ResponseEntity<Reservation> viewReservation(@PathVariable("id") int reservationId) throws ReservationNotFoundException {
+	public  ResponseEntity<Reservation> viewReservation(@PathVariable("id") Integer reservationId) throws ReservationNotFoundException {
 		Reservation viewReservation=resService.viewReservation(reservationId);
 		return new ResponseEntity<Reservation>(viewReservation,HttpStatus.CREATED);
 	}
@@ -61,8 +64,10 @@ public class ReservationController {
 	
 	
 	@GetMapping("/allreservatons/{date}")
-	public ResponseEntity<List<Reservation>> getAllReservation(@PathVariable("date") LocalDate date) throws ReservationNotFoundException{
-		List<Reservation> allReservationsByDate=resService.getAllReservation(date);
+	public ResponseEntity<List<Reservation>> getAllReservation(@PathVariable("date") String reservationDate) throws ReservationNotFoundException{
+		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate ld=LocalDate.parse(reservationDate,dtf);
+		List<Reservation> allReservationsByDate=resService.getAllReservation(ld);
 		return new ResponseEntity<List<Reservation>>(allReservationsByDate,HttpStatus.CREATED);
 	}
 }

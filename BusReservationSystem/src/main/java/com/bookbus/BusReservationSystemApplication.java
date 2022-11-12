@@ -15,5 +15,4 @@ public class BusReservationSystemApplication {
 		SpringApplication.run(BusReservationSystemApplication.class, args);
 		
 	}
-
 }
