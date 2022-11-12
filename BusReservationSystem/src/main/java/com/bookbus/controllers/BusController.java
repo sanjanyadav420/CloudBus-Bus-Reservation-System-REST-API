@@ -2,6 +2,7 @@ package com.bookbus.controllers;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookbus.dto.BusDto;
 import com.bookbus.exceptions.BusNotFoundException;
 import com.bookbus.models.Bus;
 import com.bookbus.services.BusService;
@@ -27,14 +29,14 @@ public class BusController {
 
 	
 	@PostMapping("/buses")
-	public ResponseEntity<Bus> addBus(@RequestBody Bus bus) {
+	public ResponseEntity<Bus> addBus(@RequestBody BusDto bus){
 		Bus savedBus=busService.addBus(bus);
 		return new ResponseEntity<Bus>(savedBus,HttpStatus.CREATED);
 	}
 	
 	
 	@PutMapping("/buses")
-	public ResponseEntity<Bus> updateBus(@RequestBody Bus bus) throws BusNotFoundException {
+	public ResponseEntity<Bus> updateBus(@RequestBody BusDto bus) throws BusNotFoundException {
 		Bus updatedBus=busService.updateBus(bus);
 		return new ResponseEntity<Bus>(updatedBus,HttpStatus.ACCEPTED);
 	}
