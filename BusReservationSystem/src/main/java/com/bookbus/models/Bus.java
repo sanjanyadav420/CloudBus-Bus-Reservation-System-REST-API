@@ -1,3 +1,4 @@
+
 package com.bookbus.models;
 
 import java.time.LocalTime;

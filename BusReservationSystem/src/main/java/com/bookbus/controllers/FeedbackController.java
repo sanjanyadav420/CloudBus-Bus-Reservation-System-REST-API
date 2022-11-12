@@ -1,6 +1,9 @@
 package com.bookbus.controllers;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +25,7 @@ public class FeedbackController {
 	private FeedbackService feedbackservice;
 	
 	@PostMapping("/feedback/{userid}")
-	public ResponseEntity<Feedback> addFeedBackHandler( @PathVariable("userid") Integer userId ,@RequestBody Feedback feedback) throws LogException {
+	public ResponseEntity<Feedback> addFeedBackHandler( @PathVariable("userid") Integer userId ,@Valid @RequestBody Feedback feedback) throws LogException {
 		
 		
 		Feedback addFeedback= feedbackservice.addFeedBack(feedback, userId);
@@ -32,7 +35,7 @@ public class FeedbackController {
 	}
 	
 	@PutMapping("/feedback/{userid}")
-	public ResponseEntity<Feedback> updateFeedBackHandler(@PathVariable("userid") Integer userId ,@RequestBody Feedback feedback) throws FeedbackException, LogException {
+	public ResponseEntity<Feedback> updateFeedBackHandler(@PathVariable("userid") Integer userId , @Valid @RequestBody Feedback feedback) throws FeedbackException, LogException {
 		
 		Feedback updateFeedback= feedbackservice.updateFeedBack(feedback, userId);
 		
