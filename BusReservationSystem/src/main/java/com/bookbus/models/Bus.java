@@ -1,6 +1,8 @@
+
 package com.bookbus.models;
 
 import java.time.LocalTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,14 +13,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
 public class Bus {
 	
 	@Id
@@ -30,7 +33,6 @@ public class Bus {
 //	@NotBlank(message = "Bus name should not blank")
 //	@NotEmpty(message = "Bus name should not empty")
 //	@Size(min=3,max = 15,message = "Bus name should be minimum 3 and maximum 12 character")
-//	@Size(min=3,max = 12,message = "Bus name should be minimum 3 and maximum 12 character")
 	private String busName;
 	
 //	@NotNull(message = "Bus driver name not found")
@@ -70,21 +72,5 @@ public class Bus {
 //	@Size(min = 1,max = 60,message = "Invalid number of booking or no seat available")
 	private Integer avaiableSeats;
 
-
-
-	
-	public Bus(String busName, String driverName, String busType, String routeFrom, String routeTo, LocalTime arrivalTime,
-			LocalTime departureTime, Integer seats, Integer avaiableSeats) {
-		super();
-		this.busName = busName;
-		this.driverName = driverName;
-		this.busType = busType;
-		this.routeFrom = routeFrom;
-		this.routeTo = routeTo;
-		this.arrivalTime = arrivalTime;
-		this.departureTime = departureTime;
-		this.seats = seats;
-		this.avaiableSeats = avaiableSeats;
-	}
 
 }

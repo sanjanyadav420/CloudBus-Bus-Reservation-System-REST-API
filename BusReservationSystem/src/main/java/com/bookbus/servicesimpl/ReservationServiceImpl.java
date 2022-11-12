@@ -44,15 +44,22 @@ public class ReservationServiceImpl implements ReservationService{
 		finalReservation.setReservationDate(ld);
 		
 		finalReservation.setReservationTime(LocalTime.parse(reservation.getReservationTime()));
-		finalReservation.setSource(reservation.getSource());
-		finalReservation.setDestination(reservation.getDestination());
+		
 		
 		Optional<Bus> bs= busRepo.findById(busId);
 		
 		Reservation savedReservation=null;
 		if(bs.isPresent()) {
 			Bus getBus=bs.get();
-
+			
+			if((getBus.getRouteFrom()).equals(reservation.getSource()) && (getBus.getRouteTo()).equals(reservation.getDestination())) {
+				finalReservation.setSource(reservation.getSource());
+				finalReservation.setDestination(reservation.getDestination());
+			}
+			else {
+				throw new BusNotFoundException("Bus and user source or destination is not match");
+			}
+			
 			if(getBus.getAvaiableSeats()>0) {
 				getBus.setAvaiableSeats(getBus.getAvaiableSeats()-1);
 				finalReservation.setBus(getBus);
@@ -118,7 +125,10 @@ public class ReservationServiceImpl implements ReservationService{
 	public Reservation deleteReservation(Integer reservationId) throws ReservationNotFoundException {
 		Optional<Reservation> opt= reservationRepo.findById(reservationId);
 		if(opt.isPresent()) {
-			reservationRepo.delete(opt.get());
+			Reservation resData=opt.get();
+			reservationRepo.delete(resData);
+			Bus bs=resData.getBus();
+			bs.setAvaiableSeats(bs.getAvaiableSeats()+1);
 			return opt.get();
 		}
 		else
@@ -150,7 +160,7 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Override
 	public List<Reservation> getAllReservation(LocalDate date) throws ReservationNotFoundException {
-		List<Reservation> allReservtion=reservationRepo.getAllReservationDetails(date);
+		List<Reservation> allReservtion=reservationRepo.findByReservationDate(date);
 		if(allReservtion.size()==0) {
 			throw new ReservationNotFoundException("No reservation found on "+date);
 		}
