@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,9 +25,11 @@ public class User {
 	@SequenceGenerator(name = "user_seq", sequenceName = "User_Id", allocationSize=1, initialValue=101)
 	private Integer userId;
 	
-//	@NotNull(message = "UserName field is mandatory.")
-//	@Size(min = 5, max = 15, message = "UserName should not be less than size 5 and more than 15.")
+	@NotNull(message = "UserName field is mandatory.")
+	@Size(min = 5, max = 15, message = "UserName should not be less than size 5 and more than 15.")
 	private String userName;
+	
+	@NotNull(message = "UserName field is mandatory.")
 	private String password;
 	private String firstName;
 	private String lastName;
