@@ -16,11 +16,9 @@ import com.bookbus.services.BusService;
 @Service
 public class BusServiceImpl implements BusService{
 	
-	
 	@Autowired
 	private BusRepository busRepo;
 
-	
 	@Override
 	public Bus addBus(BusDto bus){
 		Bus bs=new Bus();
@@ -37,6 +35,8 @@ public class BusServiceImpl implements BusService{
 		Bus savedBus=busRepo.save(bs);
 		
 		return savedBus;
+	}
+		
 	public Bus addBus(Bus bus) {
 		
 		return busRepo.save(bus);
@@ -48,15 +48,6 @@ public class BusServiceImpl implements BusService{
 		Optional<Bus> opt= busRepo.findById(bus.getBusId());
 		
 		if(opt.isPresent()) {
-//			opt.get().setBusName(bus.getBusName());
-//			opt.get().setDriverName(bus.getDriverName());
-//			opt.get().setBusType(bus.getBusType());
-//			opt.get().setRouteFrom(bus.getRouteFrom());
-//			opt.get().setRouteTo(bus.getRouteTo());
-//			opt.get().setArrivalTime(LocalTime.parse(bus.getArrivalTime()));
-//			opt.get().setDepartureTime(LocalTime.parse(bus.getDepartureTime()));
-//			opt.get().setSeats(bus.getSeats());
-//			opt.get().setAvaiableSeats(bus.getAvaiableSeats());
 			Bus bs=new Bus();
 			bs.setBusId(bus.getBusId());
 			bs.setBusName(bus.getBusName());

@@ -1,19 +1,17 @@
 package com.bookbus.models;
 
+import java.time.LocalTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,10 +25,6 @@ public class Bus {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="busSequence")
 	@SequenceGenerator(name = "busSequence",sequenceName = "bus_Id",allocationSize = 1,initialValue = 51)
 	private Integer busId;
-	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="busSequence")
-//	@SequenceGenerator(name = "busSequence",sequenceName = "bus_Id",allocationSize = 1,initialValue = 51)
-	private int busId;
 	
 //	@NotNull(message = "Bus name not found")
 //	@NotBlank(message = "Bus name should not blank")
@@ -77,34 +71,10 @@ public class Bus {
 	private Integer avaiableSeats;
 
 
-//	public Bus(String busName, String driverName, String busType, String routeFrom, String routeTo, LocalTime arrivalTime,
-//		LocalTime departureTime, Integer seats, Integer avaiableSeats) {
-//	super();
-//	this.busName = busName;
-//	this.driverName = driverName;
-//	this.busType = busType;
-//	this.routeFrom = routeFrom;
-//	this.routeTo = routeTo;
-//	this.arrivalTime = arrivalTime;
-//	this.departureTime = departureTime;
-//	this.seats = seats;
-//	this.avaiableSeats = avaiableSeats;
-//	}
-//	@Future(message = "Arrival time should be in future")
-	private String arrivalTime;
-	
-//	@Future(message = "Departure time should be in future")
-	private String departureTime;
-	
-	//@Min(value = 0,message = "Minimum seat is 0")
-	private Integer seats;
-	
-	//@Size(min = 0,max = 50,message = "Invalid number of booking or no seat avaiable")
-	private Integer avaiableSeats;
 
 	
-	public Bus(String busName, String driverName, String busType, String routeFrom, String routeTo, String arrivalTime,
-			String departureTime, Integer seats, Integer avaiableSeats) {
+	public Bus(String busName, String driverName, String busType, String routeFrom, String routeTo, LocalTime arrivalTime,
+			LocalTime departureTime, Integer seats, Integer avaiableSeats) {
 		super();
 		this.busName = busName;
 		this.driverName = driverName;
