@@ -12,5 +12,5 @@ public interface UserService {
 	public User updateUser(User user) throws UserException, LogException;
 	public User deleteUser(Integer userId) throws UserException, LogException;
 	public User viewUser(Integer userId) throws UserException, LogException;
-	public List<User> viewAllUser() throws UserException, LogException;
+	public List<User> viewAllUser(Integer adminId) throws UserException, LogException;
 }

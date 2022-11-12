@@ -37,6 +37,9 @@ public class BusServiceImpl implements BusService{
 		Bus savedBus=busRepo.save(bs);
 		
 		return savedBus;
+	public Bus addBus(Bus bus) {
+		
+		return busRepo.save(bus);
 	}
 
 	

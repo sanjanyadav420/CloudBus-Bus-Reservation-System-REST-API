@@ -35,7 +35,7 @@ public class UserLogServiceImpl implements UserLogService {
 			
 			if(cUserSession.isPresent()) throw new LogException("You are already LoggedIn with this EmailId "+dto.getEmailId());
 			
-			userLogRepo.save(new CurrentUserSession(user.getUserId(), LocalDateTime.now()));
+			userLogRepo.save(new CurrentUserSession(user.getUserId(), "User", LocalDateTime.now()));
 			
 			return "Hi "+user.getFirstName()+" you are loggedIn successfully.";
 		}
@@ -55,7 +55,7 @@ public class UserLogServiceImpl implements UserLogService {
 			return "You are successfully logged Out.";
 		}
 		else
-			throw new LogException("Please provide a valid Id.");
+			throw new LogException("Please provide a valid userId or you are not logged In.");
 		
 	}
 

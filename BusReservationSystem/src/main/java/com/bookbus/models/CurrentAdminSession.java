@@ -17,6 +17,7 @@ public class CurrentAdminSession {
 	@Id
 	@Column(unique = true)
 	private Integer adminId;
+	private String role;
 	private LocalDateTime localDateTime;
 
 }

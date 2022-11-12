@@ -34,7 +34,7 @@ public class AdminLogServiceImpl implements AdminLogService {
 			
 			if(cAdminSession.isPresent()) throw new LogException("You are already LoggedIn with this UserName "+dto.getAdminUserName());
 			
-			adminLogRepo.save(new CurrentAdminSession(admin.getAdminId(), LocalDateTime.now()));
+			adminLogRepo.save(new CurrentAdminSession(admin.getAdminId(), "Admin", LocalDateTime.now()));
 			
 			return "You are loggedIn successfully.";
 		}
