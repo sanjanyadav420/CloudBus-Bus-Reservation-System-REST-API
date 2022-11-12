@@ -69,7 +69,7 @@ public class Reservation {
 	private String destination;
 	
 //	@NotNull(message = "Bus details not found")
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.DETACH)
 	@JsonIgnore
 	private Bus bus;
 }
