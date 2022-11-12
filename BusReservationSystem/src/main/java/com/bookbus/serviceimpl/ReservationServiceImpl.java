@@ -1,4 +1,4 @@
-package com.bookbus.servicesimpl;
+package com.bookbus.serviceimpl;
 
 import java.time.LocalDate;
 import java.util.List;

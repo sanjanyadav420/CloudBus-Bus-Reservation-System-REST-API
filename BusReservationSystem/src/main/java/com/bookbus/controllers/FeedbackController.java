@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbus.exceptions.FeedbackException;
+import com.bookbus.exceptions.LogException;
 import com.bookbus.models.Feedback;
 import com.bookbus.services.FeedbackService;
 
@@ -23,10 +24,12 @@ public class FeedbackController {
 	@Autowired
 	private FeedbackService feedbackservice;
 	
-	@PostMapping("/feedback")
-	public ResponseEntity<Feedback> addFeedBackHandler(@RequestBody Feedback feedback) {
+	@PostMapping("/feedback/{id}")
+	public ResponseEntity<Feedback> addFeedBackHandler( @PathVariable("id") Integer userId ,@RequestBody Feedback feedback) throws LogException {
 		
-		Feedback addFeedback= feedbackservice.addFeedBack(feedback);
+		
+		
+		Feedback addFeedback= feedbackservice.addFeedBack(feedback, userId);
 		
 		return new ResponseEntity<Feedback>(addFeedback, HttpStatus.CREATED);
 		
