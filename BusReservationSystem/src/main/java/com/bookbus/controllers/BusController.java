@@ -1,8 +1,7 @@
 package com.bookbus.controllers;
 
 import java.util.List;
-
-
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bookbus.dto.BusDto;
 import com.bookbus.exceptions.BusNotFoundException;
 import com.bookbus.exceptions.LogException;
@@ -30,7 +28,7 @@ public class BusController {
 
 	
 	@PostMapping("/buses/{adminId}")
-	public ResponseEntity<Bus> addBus(@PathVariable("adminId") Integer adminId, @RequestBody BusDto bus) throws LogException{
+	public ResponseEntity<Bus> addBus(@Valid @PathVariable("adminId") Integer adminId, @RequestBody BusDto bus) throws LogException{
 		Bus savedBus=busService.addBus(adminId,bus);
 		return new ResponseEntity<Bus>(savedBus,HttpStatus.CREATED);
 	}

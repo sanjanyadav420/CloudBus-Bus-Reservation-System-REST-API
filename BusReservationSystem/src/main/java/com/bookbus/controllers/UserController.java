@@ -1,6 +1,7 @@
 package com.bookbus.controllers;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UserController {
 	private UserService uService;
 	
 	@PostMapping("/users")
-	public ResponseEntity<User> addUser(@RequestBody User user) throws UserException, LogException
+	public ResponseEntity<User> addUser(@Valid @RequestBody User user) throws UserException, LogException
 	{
 		User user1 = uService.addUser(user);
 		
@@ -33,7 +34,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/users")
-	public ResponseEntity<User> updateUser(@RequestBody User user) throws UserException, LogException
+	public ResponseEntity<User> updateUser(@Valid @RequestBody User user) throws UserException, LogException
 	{
 		User user1 = uService.updateUser(user);
 		
