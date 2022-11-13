@@ -96,6 +96,8 @@ public class ReservationServiceImpl implements ReservationService{
 				
 				user.setReservation(savedReservation);
 				
+				uRepo.save(user);
+				
 				return savedReservation;
 			}
 			else
@@ -105,8 +107,6 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		else
 			throw new LogException("Your userId is incorrect or you are not logged In.");
-		
-		
 		
 		
 	}
