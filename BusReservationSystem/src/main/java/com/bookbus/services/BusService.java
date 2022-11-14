@@ -4,16 +4,15 @@ import java.util.List;
 
 import com.bookbus.dto.BusDto;
 import com.bookbus.exceptions.BusNotFoundException;
-import com.bookbus.exceptions.LogException;
 import com.bookbus.models.Bus;
 
 public interface BusService {
 	
-	public Bus addBus(Integer adminId, BusDto bus) throws LogException;
+	public Bus addBus(BusDto bus);
 	
-	public Bus updateBus(Integer adminId, BusDto bus) throws BusNotFoundException, LogException;
+	public Bus updateBus(BusDto bus) throws BusNotFoundException;
 	
-	public Bus deleteBus(Integer adminId, Integer busId) throws BusNotFoundException, LogException;
+	public Bus deleteBus(Integer busId) throws BusNotFoundException;
 	
 	public Bus viewBus(Integer busId) throws BusNotFoundException;
 	
