@@ -29,3 +29,5 @@ This project is developed by team of 4 Back-end Developers during project week i
 - Registering themselves with application, and logging in to get the valid session token
 - Viewing list of available buses and booking a reservation
 - Only logged in user can access his reservations, profile updation and other features.
+# Contributors
+- https://github.com/rajputyash006
