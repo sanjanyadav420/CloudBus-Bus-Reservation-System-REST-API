@@ -59,7 +59,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 				throw new FeedbackException("Feedback not found");
 			} else {
-				Feedback updatedFeedBack = feedbackRepo.save(updateFeedback.get());
+				Feedback updatedFeedBack = feedbackRepo.save(feedback);
 
 				return updatedFeedBack;
 			}
