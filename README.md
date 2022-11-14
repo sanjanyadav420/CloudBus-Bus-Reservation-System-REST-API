@@ -1,6 +1,8 @@
 # gorgeous-mole-3580
-# REST API for Bus Reservation System Portal
+# CloudBus (Bus Reservation System - REST API)
 
+<img src="https://camo.githubusercontent.com/9cef08fefd36a3902bb918a2d82631aa8183c98c9b6dffa3f95cbaffe49101fd/68747470733a2f2f6769746c61622e667265656465736b746f702e6f72672f646275732f7a6275732f2d2f7261772f6d61696e2f7a6275732d706978656c732e676966" alt="Coding" width="70%"/>
+<br>
 
 We have developed this REST API for a Bus Reservation System Portal Application. This API performs all the fundamental CRUD operations of any Bus Reservation Application platform with user validation at every step.
 This project is developed by team of 4 Back-end Developers during project week in Masai School.
