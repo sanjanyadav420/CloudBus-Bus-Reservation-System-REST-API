@@ -24,7 +24,7 @@ This project is developed by team of 4 Back-end Developers during project week i
 # Features
 - User and Admin authentication & validation with session uuid.
 - Admin Features:
-      - Administrator Role of the entire application
+- Administrator Role of the entire application
 - Only registered admins with valid session token can add/update/delete route and bus from main database
 - Admin can access the details of different users and reservations.
 - User Features:
