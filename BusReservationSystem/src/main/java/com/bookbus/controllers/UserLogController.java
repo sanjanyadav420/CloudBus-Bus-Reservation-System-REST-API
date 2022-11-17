@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bookbus.dto.UserLoginDTO;
 import com.bookbus.exceptions.LogException;
-import com.bookbus.models.UserLoginDTO;
 import com.bookbus.services.UserLogService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -28,7 +29,7 @@ public class UserLogController {
 	}
 	
 	@GetMapping("/userlogout/{userId}")
-	public ResponseEntity<String> adminLogOut(@PathVariable("userId") Integer userId) throws LogException {
+	public ResponseEntity<String> UserLogOut(@PathVariable("userId") Integer userId) throws LogException {
 		
 		String result = uLogServ.userLogOut(userId);
 		return new ResponseEntity<String>(result, HttpStatus.OK);

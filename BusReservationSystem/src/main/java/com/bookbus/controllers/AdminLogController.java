@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bookbus.dto.AdminLoginDTO;
 import com.bookbus.exceptions.LogException;
-import com.bookbus.models.AdminLoginDTO;
 import com.bookbus.services.AdminLogService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 

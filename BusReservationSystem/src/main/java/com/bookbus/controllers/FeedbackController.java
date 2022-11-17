@@ -25,7 +25,7 @@ public class FeedbackController {
 	private FeedbackService feedbackservice;
 	
 	@PostMapping("/feedback/{userid}")
-	public ResponseEntity<Feedback> addFeedBackHandler( @PathVariable("userid") Integer userId ,@Valid @RequestBody Feedback feedback) throws LogException {
+	public ResponseEntity<Feedback> addFeedBackHandler(@PathVariable("userid") Integer userId ,@Valid @RequestBody Feedback feedback) throws LogException {
 		
 		
 		Feedback addFeedback= feedbackservice.addFeedBack(feedback, userId);

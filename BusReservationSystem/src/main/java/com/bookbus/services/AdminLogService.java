@@ -1,7 +1,7 @@
 package com.bookbus.services;
 
+import com.bookbus.dto.AdminLoginDTO;
 import com.bookbus.exceptions.LogException;
-import com.bookbus.models.AdminLoginDTO;
 
 public interface AdminLogService {
 	

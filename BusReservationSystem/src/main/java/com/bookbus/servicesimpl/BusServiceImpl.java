@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.bookbus.dto.BusDto;
 import com.bookbus.exceptions.BusNotFoundException;
+import com.bookbus.exceptions.LogException;
 import com.bookbus.models.Bus;
+import com.bookbus.models.CurrentAdminSession;
+import com.bookbus.repositories.AdminLogRepo;
 import com.bookbus.repositories.BusRepository;
 import com.bookbus.services.BusService;
 
@@ -20,43 +23,24 @@ public class BusServiceImpl implements BusService{
 	
 	@Autowired
 	private BusRepository busRepo;
+	
+	@Autowired
+	private AdminLogRepo alRepo;
 
 	
 	@Override
-	public Bus addBus(BusDto bus){
-		Bus bs=new Bus();
+	public Bus addBus(Integer adminId, BusDto bus) throws LogException, BusNotFoundException{
 		
-		bs.setBusName(bus.getBusName());
-		bs.setDriverName(bus.getDriverName());
-		bs.setBusType(bus.getBusType());
-		bs.setRouteFrom(bus.getRouteFrom());
-		bs.setRouteTo(bus.getRouteTo());
-		bs.setArrivalTime(LocalTime.parse(bus.getArrivalTime()));
-		bs.setDepartureTime(LocalTime.parse(bus.getDepartureTime()));
-		bs.setSeats(bus.getSeats());
-		bs.setAvaiableSeats(bus.getAvaiableSeats());
-		Bus savedBus=busRepo.save(bs);
+		if(bus.getAvaiableSeats()>bus.getSeats()) {
+			throw new BusNotFoundException("Avaiable seat is not greater then fix set of the bus");
+		}
 		
-		return savedBus;
-	}
-
-	
-	@Override
-	public Bus updateBus(BusDto bus) throws BusNotFoundException {
-		Optional<Bus> opt= busRepo.findById(bus.getBusId());
+		Optional<CurrentAdminSession> casess = alRepo.findById(adminId);
 		
-		if(opt.isPresent()) {
-//			opt.get().setBusName(bus.getBusName());
-//			opt.get().setDriverName(bus.getDriverName());
-//			opt.get().setBusType(bus.getBusType());
-//			opt.get().setRouteFrom(bus.getRouteFrom());
-//			opt.get().setRouteTo(bus.getRouteTo());
-//			opt.get().setArrivalTime(LocalTime.parse(bus.getArrivalTime()));
-//			opt.get().setDepartureTime(LocalTime.parse(bus.getDepartureTime()));
-//			opt.get().setSeats(bus.getSeats());
-//			opt.get().setAvaiableSeats(bus.getAvaiableSeats());
+		if(casess.isPresent())
+		{
 			Bus bs=new Bus();
-			bs.setBusId(bus.getBusId());
+			
 			bs.setBusName(bus.getBusName());
 			bs.setDriverName(bus.getDriverName());
 			bs.setBusType(bus.getBusType());
@@ -66,23 +50,72 @@ public class BusServiceImpl implements BusService{
 			bs.setDepartureTime(LocalTime.parse(bus.getDepartureTime()));
 			bs.setSeats(bus.getSeats());
 			bs.setAvaiableSeats(bus.getAvaiableSeats());
-			return busRepo.save(bs);
+			Bus savedBus=busRepo.save(bs);
+			
+			return savedBus;
 		}
-		
 		else
-			throw new BusNotFoundException("No bus found with bus id "+bus.getBusId());
+			throw new LogException("Admin login required to add bus");
+		
+		
 	}
 
 	
 	@Override
-	public Bus deleteBus(Integer busId) throws BusNotFoundException {
-		Optional<Bus> opt=busRepo.findById(busId);
-		if(opt.isPresent()) {
-			busRepo.delete(opt.get());
-			return opt.get();
+	public Bus updateBus(Integer adminId, BusDto bus) throws BusNotFoundException, LogException {
+		
+		if(bus.getAvaiableSeats()>bus.getSeats()) {
+			throw new BusNotFoundException("Avaiable seat is not greater then fix set of the bus");
+		}
+		
+		Optional<CurrentAdminSession> casess = alRepo.findById(adminId);
+		
+		if(casess.isPresent())
+		{
+			Optional<Bus> opt= busRepo.findById(bus.getBusId());
+			
+			if(opt.isPresent()) {
+				Bus bs=new Bus();
+				bs.setBusId(bus.getBusId());
+				bs.setBusName(bus.getBusName());
+				bs.setDriverName(bus.getDriverName());
+				bs.setBusType(bus.getBusType());
+				bs.setRouteFrom(bus.getRouteFrom());
+				bs.setRouteTo(bus.getRouteTo());
+				bs.setArrivalTime(LocalTime.parse(bus.getArrivalTime()));
+				bs.setDepartureTime(LocalTime.parse(bus.getDepartureTime()));
+				bs.setSeats(bus.getSeats());
+				bs.setAvaiableSeats(bus.getAvaiableSeats());
+				return busRepo.save(bs);
+			}
+			
+			else
+				throw new BusNotFoundException("No bus found with bus id "+bus.getBusId());
 		}
 		else
-			throw new BusNotFoundException("No bus found with bus id "+busId);
+			throw new LogException("Admin login required to update bus details");
+		
+	}
+
+	
+	@Override
+	public Bus deleteBus(Integer adminId, Integer busId) throws BusNotFoundException, LogException {
+		
+		Optional<CurrentAdminSession> casess = alRepo.findById(adminId);
+		
+		if(casess.isPresent())
+		{
+			Optional<Bus> opt=busRepo.findById(busId);
+			if(opt.isPresent()) {
+				busRepo.delete(opt.get());
+				return opt.get();
+			}
+			else
+				throw new BusNotFoundException("No bus found with bus id "+busId);
+		}
+		else
+			throw new LogException("Admin login required to delete bus from database");
+		
 	}
 
 	
