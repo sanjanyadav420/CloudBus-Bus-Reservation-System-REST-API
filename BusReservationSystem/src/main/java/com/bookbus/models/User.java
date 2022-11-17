@@ -48,7 +48,7 @@ public class User {
 	private String emailId;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.DETACH)
 	private Reservation reservation;
 
 	public User(
@@ -67,10 +67,5 @@ public class User {
 		this.emailId = emailId;
 	}
 
-	
-	
-	
-	
-	
 	
 }

@@ -5,9 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.bookbus.dto.UserLoginDTO;
 import com.bookbus.exceptions.LogException;
 import com.bookbus.models.CurrentUserSession;
-import com.bookbus.models.UserLoginDTO;
 import com.bookbus.models.User;
 import com.bookbus.repositories.UserLogRepo;
 import com.bookbus.repositories.UserRepo;

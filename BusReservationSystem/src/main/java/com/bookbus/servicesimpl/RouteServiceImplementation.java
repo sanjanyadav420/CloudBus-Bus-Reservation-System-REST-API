@@ -84,7 +84,7 @@ public class RouteServiceImplementation implements RouteService {
 	}
 
 	@Override
-	public Route viewRoute(int routeId) throws RouteException {
+	public Route viewRoute(Integer routeId) throws RouteException {
 		Optional<Route> route = routeRepo.findById(routeId);
 
 		if (route.isPresent()) {

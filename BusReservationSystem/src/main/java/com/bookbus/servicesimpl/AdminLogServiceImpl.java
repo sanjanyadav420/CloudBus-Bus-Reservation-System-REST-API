@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.bookbus.dto.AdminLoginDTO;
 import com.bookbus.exceptions.LogException;
 import com.bookbus.models.Admin;
-import com.bookbus.models.AdminLoginDTO;
 import com.bookbus.models.CurrentAdminSession;
 import com.bookbus.repositories.AdminLogRepo;
 import com.bookbus.repositories.AdminRepo;
@@ -39,7 +40,7 @@ public class AdminLogServiceImpl implements AdminLogService {
 			return "You are loggedIn successfully.";
 		}
 		else
-			throw new LogException("Please Enter a valid Password.");
+			throw new LogException("Please Enter a valid User name or Password.");
 	}
 
 	@Override
