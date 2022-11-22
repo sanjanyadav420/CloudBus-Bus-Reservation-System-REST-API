@@ -69,8 +69,8 @@ public class ReservationController {
 	}
 	
 	
-	@GetMapping("/allreservations/{date}")
-	public ResponseEntity<List<Reservation>> getAllReservation(@PathVariable("date") String reservationDate) throws Exception{
+	@GetMapping("/allreservations/{userId}/{date}")
+	public ResponseEntity<List<Reservation>> getAllReservation(@PathVariable("userId") Integer userId,@PathVariable("date") String reservationDate) throws Exception{
 		LocalDate ld=null;
 		
 		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -79,7 +79,7 @@ public class ReservationController {
 		} catch (Exception e) {
 			throw new Exception("Date must be yyyy-MM-dd formate");
 		}
-		List<Reservation> allReservationsByDate=resService.getAllReservation(ld);
+		List<Reservation> allReservationsByDate=resService.getAllReservation(userId, ld);
 		return new ResponseEntity<List<Reservation>>(allReservationsByDate,HttpStatus.CREATED);
 	}
 }
