@@ -3,6 +3,7 @@ package com.bookbus.servicesimpl;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,7 +88,10 @@ public class ReservationServiceImpl implements ReservationService{
 					finalReservation.setDestination(reservation.getDestination());
 				}
 				else {
-					throw new BusNotFoundException("Bus and user source or destination is not match");
+					throw new BusNotFoundException("Bus source or destination is not match");
+				}
+				if(!(getBus.getBusType().equals(reservation.getReservationType()))) {
+					throw new BusNotFoundException("Bus type is not match");
 				}
 				
 				if(getBus.getAvaiableSeats()>0) {
@@ -182,6 +186,9 @@ public class ReservationServiceImpl implements ReservationService{
 		{
 			Optional<Reservation> opt= reservationRepo.findById(reservationId);
 			if(opt.isPresent()) {
+				Optional<User> loginUser= uRepo.findById(userId);
+				User currentUser= loginUser.get();
+				currentUser.setReservation(null);
 				Reservation resData=opt.get();
 				reservationRepo.delete(resData);
 				Bus bs=resData.getBus();
@@ -230,13 +237,36 @@ public class ReservationServiceImpl implements ReservationService{
 
 	
 	@Override
-	public List<Reservation> getAllReservation(LocalDate date) throws ReservationNotFoundException {
-		List<Reservation> allReservtion=reservationRepo.findByReservationDate(date);
-		if(allReservtion.size()==0) {
-			throw new ReservationNotFoundException("No reservation found on "+date);
+	public List<Reservation> getAllReservation(Integer UserId,LocalDate date) throws ReservationNotFoundException{
+//		List<Reservation> allReservtion=reservationRepo.getReservationByDate(UserId, date);
+//		if(allReservtion.size()==0) {
+//			throw new ReservationNotFoundException("No reservation found on "+date);
+//		}
+//		else
+//			return allReservtion;
+		
+		Optional<User> opt= uRepo.findById(UserId);
+		if(opt.isPresent()) {
+			User u1= opt.get();
+			Reservation rse= u1.getReservation();
+			if(rse==null) {
+				throw new ReservationNotFoundException("No reservation found");
+			}
+			else {
+				List<Reservation> resvationList=new ArrayList<>();
+				if(rse.getReservationDate().compareTo(date)==0) {
+					resvationList.add(rse);
+					return resvationList;
+				}
+				else {
+					throw new ReservationNotFoundException("No reservation found with date "+date);
+				}
+			}
+			
 		}
 		else
-			return allReservtion;
+			throw new ReservationNotFoundException("No user name and date mismatch");
+		
 	}
 	
 }

@@ -22,6 +22,6 @@ public interface ReservationService {
 	
 	public List<Reservation> viewAllReservation(Integer adminId) throws ReservationNotFoundException, LogException;
 	
-	public List<Reservation> getAllReservation(LocalDate date) throws ReservationNotFoundException;
+	public List<Reservation> getAllReservation(Integer userId, LocalDate date) throws ReservationNotFoundException;
 
 }
