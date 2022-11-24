@@ -15,6 +15,7 @@ This project is developed by team of 4 Back-end Developers during construct week
 - Hibernate
 - MySQL
 - Swagger
+- Lombok
 
 # Modules
 - Login, Logout Module
