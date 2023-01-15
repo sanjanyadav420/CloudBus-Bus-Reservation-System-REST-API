@@ -6,6 +6,10 @@
 We have developed this REST API for a Bus Reservation System Portal Application. This API performs all the fundamental CRUD operations of any Bus Reservation Application platform with user or admin validation at every step.
 This project is developed by team of 4 Back-end Developers during construct week of Masai School.
 
+# ER -Diagram
+![bus_rr](https://user-images.githubusercontent.com/101393474/212560848-ba90cb8c-bf84-47d7-934e-d82d5735b6cc.PNG)
+
+
 # Tech Stack
 - Java
 - Spring Framework
