@@ -8,7 +8,8 @@ This project is developed by team of 4 Back-end Developers during construct week
 
 # ER -Diagram
 ![bus_rr](https://user-images.githubusercontent.com/101393474/212560848-ba90cb8c-bf84-47d7-934e-d82d5735b6cc.PNG)
-
+# localhost 
+http://localhost:8888/swagger-ui/index.html
 
 # Tech Stack
 - Java
